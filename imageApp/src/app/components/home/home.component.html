@@ -1,0 +1,77 @@
+<div class="container" id="navbar-container">
+  <form [formGroup]="form">
+    <section class="section">
+      <div class="has-text-centered mb-4" id="services-text-container">
+        <h1 class="title is-1">Image Analyzer</h1>
+      </div>
+      <div class="card mb-4 p-3">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Url</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input
+                  class="input"
+                  formControlName="url"
+                  type="url"
+                  placeholder="Image url"
+                  (change)="showPreview($event)"
+                />
+              </p>
+            </div>
+            <button
+              class="button is-primary"
+              (click)="submit()"
+              [disabled]="!imageURL"
+            >
+              Analyze
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <div class="has-text-centered">
+                <img [src]="imageURL" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">Results</p>
+              <button class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </header>
+            <div class="card-content">
+              <div class="table-container">
+                <table class="table is-fullwidth">
+                  <thead>
+                    <tr>
+                      <td>Tag</td>
+                      <td>Confidence</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of tags">
+                     <td>{{item.name}}</td>
+                     <td>{{item.confidence | percent }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
